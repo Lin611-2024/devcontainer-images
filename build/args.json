@@ -5,8 +5,8 @@
 			"variants": {
 				"4.4": {
 					"tags": [
-						"ghcr.io/lin611-2024/devcontainer/bayes-devcontainer:4.4",
-						"ghcr.io/lin611-2024/devcontainer/bayes-devcontainer:4"
+						"ghcr.io/lin611-2024/devcontainer/bayesdevcontainer:4.4",
+						"ghcr.io/lin611-2024/devcontainer/bayesdevcontainer:4"
 					],
 					"platforms": [
 						"linux/amd64"
@@ -14,7 +14,7 @@
 				},
 				"4.3": {
 					"tags": [
-						"ghcr.io/lin611-2024/devcontainer/bayes-devcontainer:4.3"
+						"ghcr.io/lin611-2024/devcontainer/bayesdevcontainer:4.3"
 					],
 					"platforms": [
 						"linux/amd64"
