@@ -46,8 +46,4 @@ ENV BAYES_R_PACKAGES="\
 
 RUN install2.r --error --skipinstalled $BAYES_R_PACKAGES
 
-RUN echo 'setHook("rstudio.sessionInit", function(newSession) { \
-    if (newSession && is.null(rstudioapi::getActiveProject())) {\
-        rstudioapi::openProject(".") }, action = "append") \
-    }\
-    cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")' > /home/rstudio/.Rprofile
+RUN echo 'setHook("rstudio.sessionInit", function(newSession) { if (newSession && is.null(rstudioapi::getActiveProject())) {rstudioapi::openProject(".") }, action = "append") }' > /home/rstudio/.Rprofile
