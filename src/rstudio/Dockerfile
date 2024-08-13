@@ -34,6 +34,7 @@ RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-pa
 RUN install2.r --error --skipinstalled rstanarm
 
 ENV BAYES_R_PACKAGES="\
+    here \
     brms \
     tidybayes \
     bayesplot \
@@ -46,4 +47,12 @@ ENV BAYES_R_PACKAGES="\
 
 RUN install2.r --error --skipinstalled $BAYES_R_PACKAGES
 
-RUN echo 'setHook("rstudio.sessionInit", function(newSession) { if (newSession && is.null(rstudioapi::getActiveProject())) rstudioapi::openProject(".") , action = "append") }' > /home/rstudio/.Rprofile
+RUN echo 'setHook( \
+  "rstudio.sessionInit", \
+  function(newSession) { \
+    if (newSession && is.null(rstudioapi::getActiveProject())) { \
+      rstudioapi::openProject(here::here()) \
+    } \
+  }, \
+  action = "append" \
+)' > /home/rstudio/.Rprofile
