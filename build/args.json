@@ -1,6 +1,6 @@
 {
 	"rstudio": {
-		"bayes": {
+		"bayesdevcontainer": {
 			"base-image": "docker.io/rocker/tidyverse",
 			"variants": {
 				"4.4": {
