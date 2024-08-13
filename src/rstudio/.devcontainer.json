@@ -9,15 +9,15 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
-			"version": "none",
-			"vscodeRSupport": "full",
-			"installDevTools": true,
-			"installREnv": true,
-			"installRMarkdown": true,
-			"installRadian": true,
-			"installVscDebugger": true
-		}
+	// 	"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+	// 		"version": "none",
+	// 		"vscodeRSupport": "full",
+	// 		"installDevTools": true,
+	// 		"installREnv": true,
+	// 		"installRMarkdown": true,
+	// 		"installRadian": true,
+	// 		"installVscDebugger": true
+	// 	}
 	},
 	"overrideFeatureInstallOrder": [
 		"ghcr.io/devcontainers/features/common-utils"
