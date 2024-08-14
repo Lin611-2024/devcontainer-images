@@ -6,6 +6,5 @@ setHook(
     }
   },
   action = "append"
-)
-
+);
 cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")
