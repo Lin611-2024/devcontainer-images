@@ -2,7 +2,11 @@ ARG VARIANT=4
 ARG BASE_IMAGE=rocker/rstudio
 FROM ${BASE_IMAGE}:${VARIANT}
 
+# rstudio preferences
+# and .Rprofile
 COPY --chown=rstudio:rstudio assets/rstudio-prefs.json /home/rstudio/.config/rstudio/
+COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
+
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
     && apt-get clean \
@@ -47,14 +51,3 @@ ENV BAYES_R_PACKAGES="\
 "
 
 RUN install2.r --error --skipinstalled $BAYES_R_PACKAGES
-
-RUN echo 'setHook( \
-  "rstudio.sessionInit", \
-  function(newSession) { \
-    if (newSession && is.null(rstudioapi::getActiveProject())) { \
-      rstudioapi::openProject(here::here()) \
-    } \
-  }, \
-  action = "append" \
-)\
-cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")' > /home/rstudio/.Rprofile
