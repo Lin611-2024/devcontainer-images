@@ -55,4 +55,5 @@ RUN echo 'setHook( \
     } \
   }, \
   action = "append" \
-)' > /home/rstudio/.Rprofile
+)\
+cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")' > /home/rstudio/.Rprofile
