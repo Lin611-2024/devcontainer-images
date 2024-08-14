@@ -36,6 +36,17 @@ RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-pa
 
 RUN install2.r --error --skipinstalled rstanarm
 
+RUN echo 'setHook(\
+  "rstudio.sessionInit",\
+  function(newSession) {\
+    if (newSession && is.null(rstudioapi::getActiveProject())) {\
+      rstudioapi::openProject(here::here())\
+    }\
+  },\
+  action = "append"\
+);\
+cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")' > /home/rstudio/.Rprofile
+
 # ENV BAYES_R_PACKAGES="\
 #     here \
 #     brms \
