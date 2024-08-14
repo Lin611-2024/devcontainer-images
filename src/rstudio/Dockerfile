@@ -5,7 +5,7 @@ FROM ${BASE_IMAGE}:${VARIANT}
 # rstudio preferences
 # and .Rprofile
 COPY --chown=rstudio:rstudio assets/rstudio-prefs.json /home/rstudio/.config/rstudio/
-COPY --chown=rstudio:rstudio .Rprofile /home/rstudio/
+#COPY --chown=rstudio:rstudio .Rprofile /home/rstudio/
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
     && apt-get clean \
