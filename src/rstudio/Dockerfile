@@ -37,17 +37,17 @@ RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-pa
 
 RUN install2.r --error --skipinstalled rstanarm
 
-ENV BAYES_R_PACKAGES="\
-    here \
-    brms \
-    tidybayes \
-    bayesplot \
-    Matrix \
-    projpred \
-    loo \
-    ggdist \
-    marginaleffects \
-    collapse \
-"
+# ENV BAYES_R_PACKAGES="\
+#     here \
+#     brms \
+#     tidybayes \
+#     bayesplot \
+#     Matrix \
+#     projpred \
+#     loo \
+#     ggdist \
+#     marginaleffects \
+#     collapse \
+# "
 
-RUN install2.r --error --skipinstalled $BAYES_R_PACKAGES
+RUN install2.r --error --skipinstalled $(cat rpackages)
