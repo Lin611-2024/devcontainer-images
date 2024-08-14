@@ -43,6 +43,7 @@ ENV BAYES_R_PACKAGES="\
     loo \
     ggdist \
     marginaleffects \
+    collapse \
 "
 
 RUN install2.r --error --skipinstalled $BAYES_R_PACKAGES
