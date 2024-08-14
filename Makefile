@@ -54,7 +54,7 @@ $(WORK_DIR)/Dockerfile: $(DOCKERFILE) $(WORK_DIR)/meta.env
 	echo '' >>$@
 	echo 'COPY meta.env /usr/local/etc/dev-containers/meta.env' >>$@
 
-ASSETS := $(wildcard src/$(SRC_NAME)/assets/* src/$(SRC_NAME)/assets/.*)
+ASSETS := $(wildcard src/$(SRC_NAME)/assets/*)
 $(WORK_DIR)/assets/%: src/$(SRC_NAME)/assets/%
     mkdir -p $(@D)
     cp $< $@
