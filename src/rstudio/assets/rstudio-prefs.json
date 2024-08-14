@@ -6,10 +6,5 @@
 	"initial_working_directory": "/workspaces",
 	"visual_markdown_editing_is_default": true,
     "editor_theme": "Tomorrow",
-    "server_editor_font_enabled": true,
-    "server_editor_font": "Source Code Pro",
-    "insert_native_pipe_operator": true,
-    "highlight_r_function_calls": true,
-    "rainbow_parentheses": true,
-    "syntax_color_console": true
+    "rainbow_parentheses": true
 }
