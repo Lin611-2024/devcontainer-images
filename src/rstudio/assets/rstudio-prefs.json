@@ -3,5 +3,6 @@
 	"always_save_history": false,
 	"reuse_sessions_for_project_links": true,
 	"posix_terminal_shell": "bash",
-	"initial_working_directory": "/workspaces"
+	"initial_working_directory": "/workspaces",
+	"visual_markdown_editing_is_default": true
 }
