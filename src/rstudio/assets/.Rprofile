@@ -1,11 +1,10 @@
 setHook(
   "rstudio.sessionInit",
-  function(newSession) {
+  function(newSession){
     if (newSession && is.null(rstudioapi::getActiveProject())) {
-      rstudioapi::openProject(here::here())
+      rstudioapi::openProject(".")
     }
   },
   action = "append"
 )
-
-cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")
+#cmdstanr::set_cmdstan_path("/usr/share/.cmdstan")
