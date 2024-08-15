@@ -25,6 +25,7 @@ RUN mkdir -p $HOME/.R/ \
 RUN Rscript -e 'Sys.setenv(DOWNLOAD_STATIC_LIBV8 = 1); install.packages("rstan")'
 
 ENV CMDSTAN /usr/share/.cmdstan
+RUN echo "CMDSTAN=$CMDSTAN" >> /home/rstudio/.Renviron
 
 RUN cd /usr/share/ \
     && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v2.35.0/cmdstan-2.35.0.tar.gz \
@@ -33,30 +34,5 @@ RUN cd /usr/share/ \
     && make build
 
 RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))'
-
-RUN install2.r --error --skipinstalled rstanarm
-
-# RUN echo 'setHook(\
-#   "rstudio.sessionInit",\
-#   function(newSession) {\
-#     if (newSession && is.null(rstudioapi::getActiveProject())) {\
-#       rstudioapi::openProject(here::here())\
-#     }\
-#   },\
-#   action = "append"\
-# )' > /home/rstudio/.Rprofile
-
-# ENV BAYES_R_PACKAGES="\
-#     here \
-#     brms \
-#     tidybayes \
-#     bayesplot \
-#     Matrix \
-#     projpred \
-#     loo \
-#     ggdist \
-#     marginaleffects \
-#     collapse \
-# "
 
 RUN install2.r --error --skipinstalled $(cat rpackages)
