@@ -35,12 +35,10 @@ RUN cd /usr/share/ \
     && make build
 
 # quarto update
-RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-amd64.tar.gz \
-    && mkdir ~/opt \
-    && tar -C ~/opt -xvzf quarto-1.5.56-linux-amd64.tar.gz \
-    && rm /usr/local/bin/quarto \
-    && ln -s ~/opt/quarto-1.5.56/bin/quarto /usr/local/bin/quarto
-
+RUN cd /usr/share/ \
+    && wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-amd64.tar.gz \
+    && tar -xvzf quarto-1.5.56-linux-amd64.tar.gz \
+    && mv quarto-1.5.56/bin/quarto /usr/local/bin/quarto
 
 RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))'
 
