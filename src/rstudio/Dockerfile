@@ -26,7 +26,7 @@ RUN Rscript -e 'Sys.setenv(DOWNLOAD_STATIC_LIBV8 = 1); install.packages("rstan")
 
 ENV CMDSTAN /usr/share/.cmdstan
 RUN echo "CMDSTAN=$CMDSTAN" >> /home/rstudio/.Renviron
-RUN chown=rstudio:rstudio /home/rstudio/.Renviron
+RUN chown rstudio:rstudio /home/rstudio/.Renviron
 
 RUN cd /usr/share/ \
     && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v2.35.0/cmdstan-2.35.0.tar.gz \
