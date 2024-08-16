@@ -1,5 +1,7 @@
 ARG VARIANT=4
 ARG BASE_IMAGE=rocker/rstudio
+ARG CMDSTANVERSION=2.35.0
+ARG QUARTOVERSION=1.5.56
 FROM ${BASE_IMAGE}:${VARIANT}
 
 # rstudio preferences
@@ -7,10 +9,12 @@ FROM ${BASE_IMAGE}:${VARIANT}
 COPY --chown=rstudio:rstudio assets/rstudio-prefs.json /home/rstudio/.config/rstudio/
 COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
 
+# cmdstanr support
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# stan & cmdstanr makevars
 RUN mkdir -p $HOME/.R/ \
     && echo "CXX=clang++ -stdlib=libc++ -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero -fno-omit-frame-pointer -fsanitize-address-use-after-scope -fno-sanitize=alignment -frtti" >> $HOME/.R/Makevars \
     && echo "CC=clang -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero -fno-omit-frame-pointer -fsanitize-address-use-after-scope -fno-sanitize=alignment" >> $HOME/.R/Makevars \
@@ -22,22 +26,25 @@ RUN mkdir -p $HOME/.R/ \
     && echo "rstan::rstan_options(auto_write = TRUE)" >> /home/rstudio/.Rprofile \
     && echo "options(mc.cores = parallel::detectCores())" >> /home/rstudio/.Rprofile
 
+# rstan install
 RUN Rscript -e 'Sys.setenv(DOWNLOAD_STATIC_LIBV8 = 1); install.packages("rstan")'
 
+# Telling R where cmdstan is
 ENV CMDSTAN /usr/share/.cmdstan
 RUN echo "CMDSTAN=$CMDSTAN" >> /home/rstudio/.Renviron
 RUN chown rstudio:rstudio /home/rstudio/.Renviron
 
+# download most recent cmdstan
 RUN cd /usr/share/ \
-    && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v2.35.0/cmdstan-2.35.0.tar.gz \
-    && tar -zxpf cmdstan-2.35.0.tar.gz && mv cmdstan-2.35.0 .cmdstan \
+    && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v${CMDSTANVERSION}/cmdstan-${CMDSTANVERSION}.tar.gz \
+    && tar -zxpf cmdstan-${CMDSTANVERSION}.tar.gz && mv cmdstan-${CMDSTANVERSION} .cmdstan \
     && ln -s .cmdstan cmdstan && cd .cmdstan && echo "CXX = clang++" >> make/local \
     && make build
 
 # quarto update
 RUN cd /usr/share/ \
-    && wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-amd64.tar.gz \
-    && tar -xvzf quarto-1.5.56-linux-amd64.tar.gz && mv quarto-1.5.56 .quarto \
+    && wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTOVERSION}/quarto-${QUARTOVERSION}-linux-amd64.tar.gz \
+    && tar -xvzf quarto-${QUARTOVERSION}-linux-amd64.tar.gz && mv quarto-${QUARTOVERSION} .quarto \
     && rm /usr/local/bin/quarto \
     && ln -s .quarto quarto
 

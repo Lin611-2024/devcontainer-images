@@ -4,7 +4,9 @@
 		"context": ".",
 		"args": {
 			"VARIANT": "4",
-			"BASE_IMAGE": "rocker/rstudio"
+			"BASE_IMAGE": "rocker/rstudio",
+			"CMDSTANVERSION":"2.35.0",
+			"QUARTOVERSION":"1.5.56"
 		}
 	},
 	"features": {
