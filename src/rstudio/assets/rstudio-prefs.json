@@ -4,6 +4,7 @@
 	"reuse_sessions_for_project_links": true,
 	"posix_terminal_shell": "bash",
 	"initial_working_directory": "/workspaces",
+	"visual_markdown_editing_is_default": true,
     "editor_theme": "Tomorrow",
     "rainbow_parentheses": true
 }
