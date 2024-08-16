@@ -2,6 +2,7 @@ ARG VARIANT=4
 ARG BASE_IMAGE=rocker/rstudio
 ARG CMDSTANVERSION=2.35.0
 ARG QUARTOVERSION=1.5.56
+
 FROM ${BASE_IMAGE}:${VARIANT}
 
 # rstudio preferences
@@ -35,7 +36,7 @@ RUN echo "CMDSTAN=$CMDSTAN" >> /home/rstudio/.Renviron
 RUN chown rstudio:rstudio /home/rstudio/.Renviron
 
 # download most recent cmdstan
-ENV CMDSTANVERSION ${CMDSTANVERSION}
+ARG CMDSTANVERSION
 RUN cd /usr/share/ \
     && echo "Downloading ${CMDSTANVERSION}"\
     && wget --progress=dot:mega "https://github.com/stan-dev/cmdstan/releases/download/v${CMDSTANVERSION}/cmdstan-${CMDSTANVERSION}.tar.gz" \
@@ -44,7 +45,7 @@ RUN cd /usr/share/ \
     && make build
 
 # quarto update
-ENV QUARTOVERSION ${QUARTOVERSION}
+ARG QUARTOVERSION
 RUN cd /usr/share/ \
     && wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTOVERSION}/quarto-${QUARTOVERSION}-linux-amd64.tar.gz \
     && tar -xvzf quarto-${QUARTOVERSION}-linux-amd64.tar.gz && mv quarto-${QUARTOVERSION} .quarto \
