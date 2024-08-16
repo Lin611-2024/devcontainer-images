@@ -35,6 +35,7 @@ RUN echo "CMDSTAN=$CMDSTAN" >> /home/rstudio/.Renviron
 RUN chown rstudio:rstudio /home/rstudio/.Renviron
 
 # download most recent cmdstan
+ENV CMDSTANVERSION ${CMDSTANVERSION}
 RUN cd /usr/share/ \
     && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v${CMDSTANVERSION}/cmdstan-${CMDSTANVERSION}.tar.gz \
     && tar -zxpf cmdstan-${CMDSTANVERSION}.tar.gz && mv cmdstan-${CMDSTANVERSION} .cmdstan \
@@ -42,6 +43,7 @@ RUN cd /usr/share/ \
     && make build
 
 # quarto update
+ENV QUARTOVERSION ${QUARTOVERSION}
 RUN cd /usr/share/ \
     && wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTOVERSION}/quarto-${QUARTOVERSION}-linux-amd64.tar.gz \
     && tar -xvzf quarto-${QUARTOVERSION}-linux-amd64.tar.gz && mv quarto-${QUARTOVERSION} .quarto \
