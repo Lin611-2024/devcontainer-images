@@ -51,6 +51,6 @@ I'd recommend using a `.devcontainer/devcontainer.json` file like so:
 ```
 This will
 
-- Configure RStudio server for singule user use (no login page)
+- Configure RStudio server for single user use (no login page)
 - Add the codespaces' github credentials to the R environment (enabling pushing/pulling from the RStudio Git interface.)
 - Launch RStudio server.
