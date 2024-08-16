@@ -56,5 +56,6 @@ ENV PATH "$PATH:/usr/share/quarto/bin"
 
 RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))'
 
-COPY rpackages rpackages
-RUN install2.r --error --skipinstalled $(cat rpackages)
+RUN cd /home/rstudio/
+COPY ./rpackages /home/rstudio/rpackages
+RUN install2.r --error --skipinstalled $(cat /home/rstudio/rpackages)
