@@ -8,10 +8,7 @@
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/rocker-org/devcontainer-features/rstudio-server": {
-            "singleUser": true
-        }
+		"ghcr.io/devcontainers/features/common-utils:2": {}
 	},
 	"overrideFeatureInstallOrder": [
 		"ghcr.io/devcontainers/features/common-utils"
@@ -21,17 +18,5 @@
 		"vscode": {
 			"extensions": ["RDebugger.r-debugger"]
 		}
-	},
-	"postAttachCommand": {
-        "github_user": "echo \"GITHUB_USER=$GITHUB_USER\">>~/.Renviron && echo \"GITHUB_TOKEN=$GITHUB_TOKEN\">>~/.Renviron",
-        "rstudio-start": "rserver"
-    },
-    "forwardPorts": [
-        8787
-    ],
-    "portsAttributes": {
-        "8787": {
-            "label": "RStudio IDE"
-        }
-    }
+	}
 }
