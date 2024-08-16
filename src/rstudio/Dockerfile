@@ -37,7 +37,8 @@ RUN chown rstudio:rstudio /home/rstudio/.Renviron
 # download most recent cmdstan
 ENV CMDSTANVERSION ${CMDSTANVERSION}
 RUN cd /usr/share/ \
-    && wget --progress=dot:mega https://github.com/stan-dev/cmdstan/releases/download/v${CMDSTANVERSION}/cmdstan-${CMDSTANVERSION}.tar.gz \
+    && echo "Downloading ${CMDSTANVERSION}"\
+    && wget --progress=dot:mega "https://github.com/stan-dev/cmdstan/releases/download/v${CMDSTANVERSION}/cmdstan-${CMDSTANVERSION}.tar.gz" \
     && tar -zxpf cmdstan-${CMDSTANVERSION}.tar.gz && mv cmdstan-${CMDSTANVERSION} .cmdstan \
     && ln -s .cmdstan cmdstan && cd .cmdstan && echo "CXX = clang++" >> make/local \
     && make build
