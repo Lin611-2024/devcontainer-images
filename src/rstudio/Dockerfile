@@ -9,6 +9,7 @@ FROM ${BASE_IMAGE}:${VARIANT}
 # and .Rprofile
 COPY --chown=rstudio:rstudio assets/rstudio-prefs.json /home/rstudio/.config/rstudio/
 COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
+COPY assets/.rpackages /home/rstudio/.rpackages
 
 # cmdstanr support
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
@@ -56,6 +57,4 @@ ENV PATH "$PATH:/usr/share/quarto/bin"
 
 RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))'
 
-RUN cd /home/rstudio/
-COPY ./.rpackages /home/rstudio/.rpackages
 RUN install2.r --error --skipinstalled $(cat /home/rstudio/.rpackages)
