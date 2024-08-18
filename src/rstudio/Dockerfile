@@ -58,3 +58,5 @@ ENV PATH "$PATH:/usr/share/quarto/bin"
 RUN Rscript -e 'install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))'
 
 RUN install2.r --error --skipinstalled $(cat /home/rstudio/.rpackages)
+
+RUN R -q -e 'remotes::install_github("Lin611-2024/lin611runtest")'
