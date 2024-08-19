@@ -54,3 +54,13 @@ This will
 - Configure RStudio server for single user use (no login page)
 - Add the codespaces' github credentials to the R environment (enabling pushing/pulling from the RStudio Git interface.)
 - Launch RStudio server.
+
+Once the codespace has built and the post creation commands run, you can access RStudio one of two ways.
+
+1. An info box will initially pop open telling uou that the application running on port 8787 is available.
+
+![rstudio launch](readme_assets/rstudio-launch.png)
+
+2. Under the ports tab, you should also see port 8787 labelled RStudio IDE.
+
+![rstudio port](readme_assets/rstudio-port.png)
