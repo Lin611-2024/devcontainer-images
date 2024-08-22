@@ -9,7 +9,7 @@ FROM ${BASE_IMAGE}:${VARIANT}
 # and .Rprofile
 COPY --chown=rstudio:rstudio assets/rstudio-prefs.json /home/rstudio/.config/rstudio/
 COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
-COPY --chown=rstudio:rstudio -r assets/keybindings/ /home/rstudio/.config/rstudio/keybindings/
+COPY --chown=rstudio:rstudio assets/keybindings/ /home/rstudio/.config/rstudio/keybindings/
 COPY assets/.rpackages /home/rstudio/.rpackages
 
 # cmdstanr support
