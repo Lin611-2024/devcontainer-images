@@ -57,7 +57,7 @@ $(WORK_DIR)/Dockerfile: $(DOCKERFILE) $(WORK_DIR)/meta.env
 ASSETS := $(wildcard src/$(SRC_NAME)/assets/* src/$(SRC_NAME)/assets/.*)
 $(WORK_DIR)/assets/%: src/$(SRC_NAME)/assets/%
 	mkdir -p $(@D)
-	cp $< $@
+	cp -r $< $@
 
 .PHONY: $(WORK_DIR)/meta.env
 $(WORK_DIR)/meta.env:
