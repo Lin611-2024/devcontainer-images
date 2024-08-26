@@ -12,13 +12,13 @@ COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
 COPY --chown=rstudio:rstudio assets/keybindings/ /home/rstudio/.config/rstudio/keybindings/
 COPY assets/.rpackages /home/rstudio/.rpackages
 
-# rust
-RUN apt-get install -y \
-    build-essential \
-    curl
+# # rust
+# RUN apt-get install -y \
+#     build-essential \
+#     curl
 
-# Update new packages
-RUN apt-get update
+# # Update new packages
+# RUN apt-get update
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
