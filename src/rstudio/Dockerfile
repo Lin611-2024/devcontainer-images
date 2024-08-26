@@ -12,6 +12,8 @@ COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
 COPY --chown=rstudio:rstudio assets/keybindings/ /home/rstudio/.config/rstudio/keybindings/
 COPY assets/.rpackages /home/rstudio/.rpackages
 
+RUN apt-get install cargo
+
 # cmdstanr support
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
     && apt-get clean \
