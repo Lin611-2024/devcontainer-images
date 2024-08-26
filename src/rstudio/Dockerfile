@@ -12,7 +12,18 @@ COPY --chown=rstudio:rstudio assets/.Rprofile /home/rstudio/
 COPY --chown=rstudio:rstudio assets/keybindings/ /home/rstudio/.config/rstudio/keybindings/
 COPY assets/.rpackages /home/rstudio/.rpackages
 
-RUN apt-get install cargo
+# rust
+RUN apt-get install -y \
+    build-essential \
+    curl
+
+# Update new packages
+RUN apt-get update
+
+# Get Rust
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+
+RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
 
 # cmdstanr support
 RUN apt-get update -y && apt-get install -y --no-install-recommends libglpk-dev clang-3.6 ocl-icd-libopencl1 opencl-headers clinfo\
